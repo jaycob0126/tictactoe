@@ -1,17 +1,17 @@
 
 
-class Game:
+class Tictactoe:
 
     def __init__(self, player1, player2):
         """initialize all game variables"""
-        self.player1 = player1;
-        self.player2 = player2;
+        self.player1 = player1
+        self.player2 = player2
 
         # Create board container
-        self.board = [' ' for i in range(9)]
+        self.board = [' ' for _ in range(9)]
 
         # Game status
-        self.active = True;
+        self.active = True
         self.current_player = 0
         self.blank_cells = [0]
         pass
@@ -25,7 +25,7 @@ class Game:
     @staticmethod
     def show_board_index():
         """ Shows the index number of playing board"""
-        for row in [[str(i) for i in range(j*3, (j+1)*3)] for j in range(3)]:
+        for row in [['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']]:
             print('| ' + ' | '.join(row) + ' |')
         pass
 
@@ -72,7 +72,7 @@ class Game:
 
 def play(game):
     """ function to create the game loop"""
-    Game.show_board_index()
+    Tictactoe.show_board_index()
 
     while game.active:
         game.next_player()

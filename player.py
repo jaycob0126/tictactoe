@@ -52,17 +52,40 @@ class HumanPlayer(Player):
         pass
 
     def mark(self, game):
-        player_in = input('0-8 or q to exit: ')
+        """ Marking with input validation"""
 
-        if player_in == 'q':
-            game.active = False
-        else:
-            super().mark(game, int(player_in))
+        while True:
+            player_in = input('1-9 or q to exit: ')
+            if player_in == 'q':
+                sure_to_exit = input('are you sure to exit game? y/n: ')
+                if sure_to_exit == 'y':
+                    print('Game terminated')
+                    game.active = False
+                    break
+                elif sure_to_exit == 'n':
+                    continue
+            else:
+                try:
+                    # Map the layout of a keyboard numpad
+                    cell_index = [6, 7, 8, 3, 4, 5, 0, 1, 2]
+                    player_input = int(player_in)
+
+                    # Check if user input is within 1-9 range
+                    if player_input < 1 or player_input > 9:
+                        print('Invalid number, Please input 1-9')
+                        continue
+
+                    # Calls superclass' mark method
+                    super().mark(game, cell_index[player_input-1])
+                    break
+
+                except ValueError:
+                    # Exception if user has inputted a value other than 1-9 or q
+                    print("Invalid input, Please input 1-9 or q to exit")
 
 
-# TODO: Edit computer player
 class ComputerPlayer(Player):
-
+    """A computer player that only plays just in random choices"""
     def __init__(self, symbol):
         super().__init__(symbol)
         pass
