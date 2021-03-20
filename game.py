@@ -1,5 +1,4 @@
 import os
-import time
 
 class Tictactoe:
 
@@ -73,7 +72,6 @@ class Tictactoe:
         self.blank_cells = [i for i in range(9)]
         print("New game:")
         Tictactoe.show_board_index()
-        time.sleep(1)
 
     @staticmethod
     def clear_console():
@@ -84,11 +82,12 @@ def play(game):
     """ function to create the game loop"""
     Tictactoe.show_board_index()
 
-    while game.active:
+    iter = 100
+    index = 0
+    while index > iter:
         game.next_player()
         Tictactoe.clear_console()
-        game.show_board() if game.active else None
         game.check_game_stats()
 
-        time.sleep(1)
+        index += 1
 
