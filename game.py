@@ -25,7 +25,7 @@ class Tictactoe:
     @staticmethod
     def show_board_index():
         """ Shows the index number of playing board"""
-        for row in [['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']]:
+        for row in [[str(i) for i in range(7-3*j, 10-3*j)] for j in range(3)]:
             print('| ' + ' | '.join(row) + ' |')
         pass
 

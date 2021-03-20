@@ -6,7 +6,7 @@ class Player:
     def __init__(self, symbol):
         self.symbol = symbol
 
-        # there are 8 checks
+        # there are 8 checks 3 rows, 3 columns, 2 diagonals
         self.points = [0 for _ in range(8)]
         pass
 
@@ -15,8 +15,12 @@ class Player:
         game.board[player_in] = self.symbol
 
     def update_points(self, game):
+        """ Updates the player point list """
+
+        # diagonal points
         diag_point1 = 0
         diag_point2 = 0
+
         for i in range(3):
             row_point = 0
             col_point = 0
@@ -67,7 +71,8 @@ class HumanPlayer(Player):
             else:
                 try:
                     # Map the layout of a keyboard numpad
-                    cell_index = [6, 7, 8, 3, 4, 5, 0, 1, 2]
+                    # haha just practicing some list comprehension
+                    cell_index = [item for row in [[i for i in range(6-3*j, 9 - 3*j)] for j in range(3)] for item in row]
                     player_input = int(player_in)
 
                     # Check if user input is within 1-9 range
