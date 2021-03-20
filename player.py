@@ -100,7 +100,6 @@ class ComputerPlayer(Player):
         pass
 
     def mark(self, game):
-        print('Computer Moves')
         player_in = choice(game.blank_cells)
 
         if player_in == 'q':

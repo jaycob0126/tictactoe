@@ -1,4 +1,5 @@
 import os
+import time
 
 class Tictactoe:
 
@@ -33,8 +34,10 @@ class Tictactoe:
         """ Selects next player to mark """
 
         if self.current_player == 0:
+            print("player 1 Move")
             self.player1.mark(self)
         else:
+            print("player 2 Move")
             self.player2.mark(self)
 
         self.current_player = 1 - self.current_player
@@ -55,14 +58,26 @@ class Tictactoe:
 
         if max(player1_points) == 3:
             print("player1 wins!")
-            self.active = False
+            self.reset()
         elif max(player2_points) == 3:
             print("player2 wins!")
-            self.active = False
+            self.reset()
         elif len(self.blank_cells) == 0:
             # If all cells have been marked deactivate the game
             print("Its a tie!")
-            self.active = False
+            self.reset()
+
+    def reset(self):
+        # Tictactoe.clear_console()
+        self.board = [' ' for _ in range(9)]
+        self.blank_cells = [i for i in range(9)]
+        print("New game:")
+        Tictactoe.show_board_index()
+        time.sleep(1)
+
+    @staticmethod
+    def clear_console():
+        os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def play(game):
@@ -71,6 +86,9 @@ def play(game):
 
     while game.active:
         game.next_player()
-        os.system('cls' if os.name == 'nt' else 'clear')
-        game.show_board()
+        Tictactoe.clear_console()
+        game.show_board() if game.active else None
         game.check_game_stats()
+
+        time.sleep(1)
+
