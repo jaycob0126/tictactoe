@@ -1,4 +1,6 @@
 import os
+import time
+
 
 class Tictactoe:
 
@@ -14,6 +16,12 @@ class Tictactoe:
         self.active = True
         self.current_player = 0
         self.blank_cells = [i for i in range(9)]
+        self.games_played = 0
+
+        #Scores
+        self.player1_score = 0
+        self.player2_score = 0
+        self.ties = 0
         pass
 
     def show_board(self):
@@ -33,10 +41,8 @@ class Tictactoe:
         """ Selects next player to mark """
 
         if self.current_player == 0:
-            print("player 1 Move")
             self.player1.mark(self)
         else:
-            print("player 2 Move")
             self.player2.mark(self)
 
         self.current_player = 1 - self.current_player
@@ -46,7 +52,7 @@ class Tictactoe:
 
     def available_moves(self):
         """ Returns a list of index of cells that have not been marked"""
-        self.blank_cells = [ i for i, cell in enumerate(self.board) if cell == ' ']
+        self.blank_cells = [i for i, cell in enumerate(self.board) if cell == ' ']
 
     def check_game_stats(self):
         """ Checks all the status of game objects and ends the game
@@ -56,22 +62,21 @@ class Tictactoe:
         player2_points = self.player2.update_points(self)
 
         if max(player1_points) == 3:
-            print("player1 wins!")
+            self.player1_score += 1
             self.reset()
         elif max(player2_points) == 3:
-            print("player2 wins!")
+            self.player2_score += 1
             self.reset()
         elif len(self.blank_cells) == 0:
             # If all cells have been marked deactivate the game
-            print("Its a tie!")
+            self.ties += 1
             self.reset()
 
     def reset(self):
         # Tictactoe.clear_console()
         self.board = [' ' for _ in range(9)]
         self.blank_cells = [i for i in range(9)]
-        print("New game:")
-        Tictactoe.show_board_index()
+        self.games_played += 1
 
     @staticmethod
     def clear_console():
@@ -80,14 +85,13 @@ class Tictactoe:
 
 def play(game):
     """ function to create the game loop"""
-    Tictactoe.show_board_index()
 
-    iter = 100
-    index = 0
-    while index > iter:
+    iter = 10_000
+    while game.games_played < iter:
         game.next_player()
-        Tictactoe.clear_console()
         game.check_game_stats()
 
-        index += 1
-
+    print("player 1: ", game.player1_score)
+    print("player 2: ", game.player2_score)
+    print("ties: ", game.ties)
+    print("games played: ", game.games_played)

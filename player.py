@@ -102,7 +102,17 @@ class ComputerPlayer(Player):
     def mark(self, game):
         player_in = choice(game.blank_cells)
 
-        if player_in == 'q':
-            game.active = False
-        else:
-            super().mark(game, int(player_in))
+        super().mark(game, int(player_in))
+
+
+# TODO: AI
+class AIPlayer(Player):
+    """AI player"""
+    def __init__(self):
+        super.__init__()
+        pass
+
+    def mark(self, game):
+        player_in = choice(game.blank_cells)
+
+        super().mark(game, int(player_in))
