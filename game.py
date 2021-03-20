@@ -1,4 +1,4 @@
-
+import os
 
 class Tictactoe:
 
@@ -71,5 +71,6 @@ def play(game):
 
     while game.active:
         game.next_player()
+        os.system('cls' if os.name == 'nt' else 'clear')
         game.show_board()
         game.check_game_stats()
