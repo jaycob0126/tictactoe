@@ -44,11 +44,7 @@ class Tictactoe:
 
     def available_moves(self):
         """ Returns a list of index of cells that have not been marked"""
-
-        self.blank_cells = []
-        for i, cell in enumerate(self.board):
-            if cell == " ":
-                self.blank_cells.append(i)
+        self.blank_cells = [ i for i, cell in enumerate(self.board) if cell == ' ']
 
     def check_game_stats(self):
         """ Checks all the status of game objects and ends the game
@@ -63,9 +59,8 @@ class Tictactoe:
         elif max(player2_points) == 3:
             print("player2 wins!")
             self.active = False
-
-        # If all cells have been marked deactivate the game
-        if len(self.blank_cells) == 0:
+        elif len(self.blank_cells) == 0:
+            # If all cells have been marked deactivate the game
             print("Its a tie!")
             self.active = False
 
