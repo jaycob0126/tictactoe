@@ -13,7 +13,7 @@ class Tictactoe:
         # Game status
         self.active = True
         self.current_player = 0
-        self.blank_cells = [0]
+        self.blank_cells = [i for i in range(9)]
         pass
 
     def show_board(self):

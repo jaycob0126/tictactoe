@@ -80,6 +80,10 @@ class HumanPlayer(Player):
                         print('Invalid number, Please input 1-9')
                         continue
 
+                    if cell_index[player_input-1] not in game.blank_cells:
+                        print("Cell already marked")
+                        continue
+
                     # Calls superclass' mark method
                     super().mark(game, cell_index[player_input-1])
                     break
